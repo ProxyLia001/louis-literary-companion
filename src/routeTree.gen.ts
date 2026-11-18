@@ -10,33 +10,183 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedEditorRouteImport } from './routes/_authenticated/editor'
+import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedMemoryRouteImport } from './routes/_authenticated/memory'
+import { Route as AuthenticatedResearchRouteImport } from './routes/_authenticated/research'
+import { Route as AuthenticatedStoryBibleRouteImport } from './routes/_authenticated/story-bible'
+import { Route as AuthenticatedWriterProfileRouteImport } from './routes/_authenticated/writer-profile'
+import { Route as AuthenticatedWritingRoomRouteImport } from './routes/_authenticated/writing-room'
+import { Route as AuthenticatedLibraryIndexRouteImport } from './routes/_authenticated/library.index'
+import { Route as AuthenticatedLibraryProjectIdIndexRouteImport } from './routes/_authenticated/library.$projectId.index'
+import { Route as AuthenticatedLibraryProjectIdChapterIdRouteImport } from './routes/_authenticated/library.$projectId.$chapterId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedEditorRoute = AuthenticatedEditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMemoryRoute = AuthenticatedMemoryRouteImport.update({
+  id: '/memory',
+  path: '/memory',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedResearchRoute = AuthenticatedResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStoryBibleRoute = AuthenticatedStoryBibleRouteImport.update({
+  id: '/story-bible',
+  path: '/story-bible',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedWriterProfileRoute =
+  AuthenticatedWriterProfileRouteImport.update({
+    id: '/writer-profile',
+    path: '/writer-profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedWritingRoomRoute =
+  AuthenticatedWritingRoomRouteImport.update({
+    id: '/writing-room',
+    path: '/writing-room',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedLibraryIndexRoute =
+  AuthenticatedLibraryIndexRouteImport.update({
+    id: '/library/',
+    path: '/library/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedLibraryProjectIdIndexRoute =
+  AuthenticatedLibraryProjectIdIndexRouteImport.update({
+    id: '/library/$projectId/',
+    path: '/library/$projectId/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedLibraryProjectIdChapterIdRoute =
+  AuthenticatedLibraryProjectIdChapterIdRouteImport.update({
+    id: '/library/$projectId/$chapterId',
+    path: '/library/$projectId/$chapterId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/editor': typeof AuthenticatedEditorRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/memory': typeof AuthenticatedMemoryRoute
+  '/research': typeof AuthenticatedResearchRoute
+  '/story-bible': typeof AuthenticatedStoryBibleRoute
+  '/writer-profile': typeof AuthenticatedWriterProfileRoute
+  '/writing-room': typeof AuthenticatedWritingRoomRoute
+  '/library/': typeof AuthenticatedLibraryIndexRoute
+  '/library/$projectId/$chapterId': typeof AuthenticatedLibraryProjectIdChapterIdRoute
+  '/library/$projectId/': typeof AuthenticatedLibraryProjectIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/editor': typeof AuthenticatedEditorRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/memory': typeof AuthenticatedMemoryRoute
+  '/research': typeof AuthenticatedResearchRoute
+  '/story-bible': typeof AuthenticatedStoryBibleRoute
+  '/writer-profile': typeof AuthenticatedWriterProfileRoute
+  '/writing-room': typeof AuthenticatedWritingRoomRoute
+  '/library': typeof AuthenticatedLibraryIndexRoute
+  '/library/$projectId/$chapterId': typeof AuthenticatedLibraryProjectIdChapterIdRoute
+  '/library/$projectId': typeof AuthenticatedLibraryProjectIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/editor': typeof AuthenticatedEditorRoute
+  '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/memory': typeof AuthenticatedMemoryRoute
+  '/_authenticated/research': typeof AuthenticatedResearchRoute
+  '/_authenticated/story-bible': typeof AuthenticatedStoryBibleRoute
+  '/_authenticated/writer-profile': typeof AuthenticatedWriterProfileRoute
+  '/_authenticated/writing-room': typeof AuthenticatedWritingRoomRoute
+  '/_authenticated/library/': typeof AuthenticatedLibraryIndexRoute
+  '/_authenticated/library/$projectId/$chapterId': typeof AuthenticatedLibraryProjectIdChapterIdRoute
+  '/_authenticated/library/$projectId/': typeof AuthenticatedLibraryProjectIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/editor'
+    | '/home'
+    | '/memory'
+    | '/research'
+    | '/story-bible'
+    | '/writer-profile'
+    | '/writing-room'
+    | '/library/'
+    | '/library/$projectId/$chapterId'
+    | '/library/$projectId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/editor'
+    | '/home'
+    | '/memory'
+    | '/research'
+    | '/story-bible'
+    | '/writer-profile'
+    | '/writing-room'
+    | '/library'
+    | '/library/$projectId/$chapterId'
+    | '/library/$projectId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/editor'
+    | '/_authenticated/home'
+    | '/_authenticated/memory'
+    | '/_authenticated/research'
+    | '/_authenticated/story-bible'
+    | '/_authenticated/writer-profile'
+    | '/_authenticated/writing-room'
+    | '/_authenticated/library/'
+    | '/_authenticated/library/$projectId/$chapterId'
+    | '/_authenticated/library/$projectId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +198,128 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/editor': {
+      id: '/_authenticated/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof AuthenticatedEditorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/home': {
+      id: '/_authenticated/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AuthenticatedHomeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/memory': {
+      id: '/_authenticated/memory'
+      path: '/memory'
+      fullPath: '/memory'
+      preLoaderRoute: typeof AuthenticatedMemoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/research': {
+      id: '/_authenticated/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof AuthenticatedResearchRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/story-bible': {
+      id: '/_authenticated/story-bible'
+      path: '/story-bible'
+      fullPath: '/story-bible'
+      preLoaderRoute: typeof AuthenticatedStoryBibleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/writer-profile': {
+      id: '/_authenticated/writer-profile'
+      path: '/writer-profile'
+      fullPath: '/writer-profile'
+      preLoaderRoute: typeof AuthenticatedWriterProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/writing-room': {
+      id: '/_authenticated/writing-room'
+      path: '/writing-room'
+      fullPath: '/writing-room'
+      preLoaderRoute: typeof AuthenticatedWritingRoomRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/library/': {
+      id: '/_authenticated/library/'
+      path: '/library'
+      fullPath: '/library/'
+      preLoaderRoute: typeof AuthenticatedLibraryIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/library/$projectId/': {
+      id: '/_authenticated/library/$projectId/'
+      path: '/library/$projectId'
+      fullPath: '/library/$projectId/'
+      preLoaderRoute: typeof AuthenticatedLibraryProjectIdIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/library/$projectId/$chapterId': {
+      id: '/_authenticated/library/$projectId/$chapterId'
+      path: '/library/$projectId/$chapterId'
+      fullPath: '/library/$projectId/$chapterId'
+      preLoaderRoute: typeof AuthenticatedLibraryProjectIdChapterIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedEditorRoute: typeof AuthenticatedEditorRoute
+  AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedMemoryRoute: typeof AuthenticatedMemoryRoute
+  AuthenticatedResearchRoute: typeof AuthenticatedResearchRoute
+  AuthenticatedStoryBibleRoute: typeof AuthenticatedStoryBibleRoute
+  AuthenticatedWriterProfileRoute: typeof AuthenticatedWriterProfileRoute
+  AuthenticatedWritingRoomRoute: typeof AuthenticatedWritingRoomRoute
+  AuthenticatedLibraryIndexRoute: typeof AuthenticatedLibraryIndexRoute
+  AuthenticatedLibraryProjectIdChapterIdRoute: typeof AuthenticatedLibraryProjectIdChapterIdRoute
+  AuthenticatedLibraryProjectIdIndexRoute: typeof AuthenticatedLibraryProjectIdIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedEditorRoute: AuthenticatedEditorRoute,
+  AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedMemoryRoute: AuthenticatedMemoryRoute,
+  AuthenticatedResearchRoute: AuthenticatedResearchRoute,
+  AuthenticatedStoryBibleRoute: AuthenticatedStoryBibleRoute,
+  AuthenticatedWriterProfileRoute: AuthenticatedWriterProfileRoute,
+  AuthenticatedWritingRoomRoute: AuthenticatedWritingRoomRoute,
+  AuthenticatedLibraryIndexRoute: AuthenticatedLibraryIndexRoute,
+  AuthenticatedLibraryProjectIdChapterIdRoute:
+    AuthenticatedLibraryProjectIdChapterIdRoute,
+  AuthenticatedLibraryProjectIdIndexRoute:
+    AuthenticatedLibraryProjectIdIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
