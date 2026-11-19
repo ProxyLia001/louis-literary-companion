@@ -37,7 +37,7 @@ function ProjectPage() {
       narrative_perspective: form.narrative_perspective || null,
       themes: form.themes.split(",").map((t) => t.trim()).filter(Boolean),
     }).eq("id", p.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Project saved");
     qc.invalidateQueries({ queryKey: ["project", p.id] }); qc.invalidateQueries({ queryKey: ["projects"] });
   };
@@ -45,14 +45,14 @@ function ProjectPage() {
   const addChapter = async () => {
     const { data, error } = await supabase.from("chapters")
       .insert({ project_id: p.id, title: `Chapter ${p.chapters.length + 1}`, position: p.chapters.length }).select("id").single();
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["project", p.id] }); qc.invalidateQueries({ queryKey: ["projects"] });
     navigate({ to: "/library/$projectId/$chapterId", params: { projectId: p.id, chapterId: data.id } });
   };
 
   const remove = async () => {
     const { error } = await supabase.from("projects").delete().eq("id", p.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["projects"] });
     navigate({ to: "/library" });
   };

@@ -41,7 +41,7 @@ function ChapterPage() {
   const remove = async () => {
     if (!confirm("Delete this chapter permanently?")) return;
     const { error } = await supabase.from("chapters").delete().eq("id", chapterId);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["project", projectId] });
     navigate({ to: "/library/$projectId", params: { projectId } });
   };

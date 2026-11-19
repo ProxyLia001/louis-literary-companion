@@ -26,7 +26,7 @@ export function NewProjectDialog() {
     const { data, error } = await supabase.from("projects")
       .insert({ title: title.trim(), genre: genre || null, synopsis: synopsis || null }).select("id").single();
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["projects"] });
     setOpen(false);
     navigate({ to: "/library/$projectId", params: { projectId: data.id } });

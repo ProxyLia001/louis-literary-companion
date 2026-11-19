@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Every user-owned table has `user_id default auth.uid()` and an owner-only RLS policy; project-scoped data cascades from `projects` to keep novels isolated.
+- Memories and writer-profile changes are append/supersede, never in-place overwrite — preserves history.
+- AI and research calls live only in server functions behind provider interfaces so vendors can be swapped.
+- See docs/ARCHITECTURE.md for schema and roadmap.
