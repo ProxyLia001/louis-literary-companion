@@ -19,6 +19,8 @@ import { Route as AuthenticatedResearchRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedStoryBibleRouteImport } from './routes/_authenticated/story-bible'
 import { Route as AuthenticatedWriterProfileRouteImport } from './routes/_authenticated/writer-profile'
 import { Route as AuthenticatedWritingRoomRouteImport } from './routes/_authenticated/writing-room'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthenticatedChatConversationIdRouteImport } from './routes/_authenticated/chat.$conversationId'
 import { Route as AuthenticatedLibraryIndexRouteImport } from './routes/_authenticated/library.index'
 import { Route as AuthenticatedLibraryProjectIdIndexRouteImport } from './routes/_authenticated/library.$projectId.index'
 import { Route as AuthenticatedLibraryProjectIdChapterIdRouteImport } from './routes/_authenticated/library.$projectId.$chapterId'
@@ -74,6 +76,17 @@ const AuthenticatedWritingRoomRoute =
     path: '/writing-room',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedChatConversationIdRoute =
+  AuthenticatedChatConversationIdRouteImport.update({
+    id: '/chat/$conversationId',
+    path: '/chat/$conversationId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLibraryIndexRoute =
   AuthenticatedLibraryIndexRouteImport.update({
     id: '/library/',
@@ -103,6 +116,8 @@ export interface FileRoutesByFullPath {
   '/story-bible': typeof AuthenticatedStoryBibleRoute
   '/writer-profile': typeof AuthenticatedWriterProfileRoute
   '/writing-room': typeof AuthenticatedWritingRoomRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$conversationId': typeof AuthenticatedChatConversationIdRoute
   '/library/': typeof AuthenticatedLibraryIndexRoute
   '/library/$projectId/$chapterId': typeof AuthenticatedLibraryProjectIdChapterIdRoute
   '/library/$projectId/': typeof AuthenticatedLibraryProjectIdIndexRoute
@@ -117,6 +132,8 @@ export interface FileRoutesByTo {
   '/story-bible': typeof AuthenticatedStoryBibleRoute
   '/writer-profile': typeof AuthenticatedWriterProfileRoute
   '/writing-room': typeof AuthenticatedWritingRoomRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$conversationId': typeof AuthenticatedChatConversationIdRoute
   '/library': typeof AuthenticatedLibraryIndexRoute
   '/library/$projectId/$chapterId': typeof AuthenticatedLibraryProjectIdChapterIdRoute
   '/library/$projectId': typeof AuthenticatedLibraryProjectIdIndexRoute
@@ -133,6 +150,8 @@ export interface FileRoutesById {
   '/_authenticated/story-bible': typeof AuthenticatedStoryBibleRoute
   '/_authenticated/writer-profile': typeof AuthenticatedWriterProfileRoute
   '/_authenticated/writing-room': typeof AuthenticatedWritingRoomRoute
+  '/api/chat': typeof ApiChatRoute
+  '/_authenticated/chat/$conversationId': typeof AuthenticatedChatConversationIdRoute
   '/_authenticated/library/': typeof AuthenticatedLibraryIndexRoute
   '/_authenticated/library/$projectId/$chapterId': typeof AuthenticatedLibraryProjectIdChapterIdRoute
   '/_authenticated/library/$projectId/': typeof AuthenticatedLibraryProjectIdIndexRoute
@@ -149,6 +168,8 @@ export interface FileRouteTypes {
     | '/story-bible'
     | '/writer-profile'
     | '/writing-room'
+    | '/api/chat'
+    | '/chat/$conversationId'
     | '/library/'
     | '/library/$projectId/$chapterId'
     | '/library/$projectId/'
@@ -163,6 +184,8 @@ export interface FileRouteTypes {
     | '/story-bible'
     | '/writer-profile'
     | '/writing-room'
+    | '/api/chat'
+    | '/chat/$conversationId'
     | '/library'
     | '/library/$projectId/$chapterId'
     | '/library/$projectId'
@@ -178,6 +201,8 @@ export interface FileRouteTypes {
     | '/_authenticated/story-bible'
     | '/_authenticated/writer-profile'
     | '/_authenticated/writing-room'
+    | '/api/chat'
+    | '/_authenticated/chat/$conversationId'
     | '/_authenticated/library/'
     | '/_authenticated/library/$projectId/$chapterId'
     | '/_authenticated/library/$projectId/'
@@ -187,6 +212,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -261,6 +287,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedWritingRoomRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/chat/$conversationId': {
+      id: '/_authenticated/chat/$conversationId'
+      path: '/chat/$conversationId'
+      fullPath: '/chat/$conversationId'
+      preLoaderRoute: typeof AuthenticatedChatConversationIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/library/': {
       id: '/_authenticated/library/'
       path: '/library'
@@ -293,6 +333,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedStoryBibleRoute: typeof AuthenticatedStoryBibleRoute
   AuthenticatedWriterProfileRoute: typeof AuthenticatedWriterProfileRoute
   AuthenticatedWritingRoomRoute: typeof AuthenticatedWritingRoomRoute
+  AuthenticatedChatConversationIdRoute: typeof AuthenticatedChatConversationIdRoute
   AuthenticatedLibraryIndexRoute: typeof AuthenticatedLibraryIndexRoute
   AuthenticatedLibraryProjectIdChapterIdRoute: typeof AuthenticatedLibraryProjectIdChapterIdRoute
   AuthenticatedLibraryProjectIdIndexRoute: typeof AuthenticatedLibraryProjectIdIndexRoute
@@ -306,6 +347,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedStoryBibleRoute: AuthenticatedStoryBibleRoute,
   AuthenticatedWriterProfileRoute: AuthenticatedWriterProfileRoute,
   AuthenticatedWritingRoomRoute: AuthenticatedWritingRoomRoute,
+  AuthenticatedChatConversationIdRoute: AuthenticatedChatConversationIdRoute,
   AuthenticatedLibraryIndexRoute: AuthenticatedLibraryIndexRoute,
   AuthenticatedLibraryProjectIdChapterIdRoute:
     AuthenticatedLibraryProjectIdChapterIdRoute,
@@ -320,6 +362,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
